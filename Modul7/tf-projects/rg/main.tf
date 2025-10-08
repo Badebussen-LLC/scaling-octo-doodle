@@ -8,17 +8,27 @@ terraform {
 }
 
 provider "azurerm" {
-  subscription_id = "7a3c6854-0fe1-42eb-b5b9-800af1e53d70"
   features {}
 }
 
 resource "azurerm_resource_group" "fd-rg" {
-  name     = "rg-tfwf-demo-alth13"
-  location = "uksouth"
+  name     = "var.rgname"
+  location = "var.location"
   tags = {
     costcenter  = "123EXPENSES456"
     environment = "dev-rg-demoenv-01"
     owner       = "alexander.thuestad@tisipfagskole.no"
     project     = "testdev-project-01"
   }
+}
+
+variable "rgname" {
+  description = "Name of Resource Group"
+  type        = string
+
+}
+
+variable "location" {
+  description = "Default Location for Azure Resources"
+  type        = string
 }
