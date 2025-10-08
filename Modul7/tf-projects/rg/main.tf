@@ -12,7 +12,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "fd-rg" {
-  name     = "var.rgname"
+  name     = "var.rg_name"
   location = "var.location"
   tags = {
     costcenter  = "123EXPENSES456"
@@ -22,7 +22,7 @@ resource "azurerm_resource_group" "fd-rg" {
   }
 }
 
-variable "rgname" {
+variable "rg_name" {
   description = "Name of Resource Group"
   type        = string
 
