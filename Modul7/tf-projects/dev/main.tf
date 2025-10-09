@@ -47,6 +47,6 @@ variable "location" {
 variable "saname" {
   description = "Name of Storage Account"
   type = string
-  default = "saautowfdevalx010011"
+  default = "saautowfdevalx0011110011"
   
 }

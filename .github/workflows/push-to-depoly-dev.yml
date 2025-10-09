@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'Modul7/tf-project/dev/**'  # Kun trigger ved endringer i prosjekt
+      - 'Modul7/tf-projects/dev/**'  # Kun trigger ved endringer i prosjekt
 
 permissions:
   id-token: write
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     env:
-      WORKDIR: "Modul7/tf-project/dev"
+      WORKDIR: "Modul7/tf-projects/dev"
       TF_INPUT: "false"              # Forhindrer interactive input
       TF_IN_AUTOMATION: "true"       # Terraform automation mode
     
