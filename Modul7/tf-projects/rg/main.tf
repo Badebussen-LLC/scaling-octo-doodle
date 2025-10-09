@@ -5,21 +5,33 @@ terraform {
       version = "~> 4.40.0"
     }
   }
+  backend "azurerm" {
+  }
 }
+
 
 provider "azurerm" {
   features {}
 }
+
 
 resource "azurerm_resource_group" "fd-rg" {
   name     = var.rg_name
   location = var.location
   tags = {
     costcenter  = "123EXPENSES456"
-    environment = "dev-rg-demoenv-01"
+    environment = "dev-rgsa-demoenv-02"
     owner       = "alexander.thuestad@tisipfagskole.no"
-    project     = "testdev-project-01"
+    project     = "testdev-project-rgsa-02"
   }
+}
+
+resource "azurerm_storage_account" "sa-wf" {
+  name = var.saname
+  resource_group_name = azurerm_resource_group.fd-rg.name
+  location = azurerm_resource_group.fd-rg.location
+  account_tier = "Standard"
+  account_replication_type = "LRS"
 }
 
 variable "rg_name" {
@@ -31,4 +43,11 @@ variable "rg_name" {
 variable "location" {
   description = "Default Location for Azure Resources"
   type        = string
+}
+
+variable "saname" {
+  description = "Name of Storage Account"
+  type = string
+  default = "sa-wfdemo-althu12140"
+  
 }
