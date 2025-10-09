@@ -48,6 +48,6 @@ variable "location" {
 variable "saname" {
   description = "Name of Storage Account"
   type = string
-  default = "saautodeploytestalthu99million"
+  default = "saautodeploytestalthu99"
   
 }
