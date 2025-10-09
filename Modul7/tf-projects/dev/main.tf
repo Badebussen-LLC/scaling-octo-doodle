@@ -16,13 +16,13 @@ provider "azurerm" {
 
 
 resource "azurerm_resource_group" "fd-rg" {
-  name     = "dev-${var.rg_name}-013"
+  name     = "dev-${var.rg_name}-014"
   location = var.location
   tags = {
     costcenter  = "123EXPENSES456"
-    environment = "dev-demoenv-13"
+    environment = "dev-demoenv-14"
     owner       = "alexander.thuestad@tisipfagskole.no"
-    project     = "dev-project-13"
+    project     = "dev-project-14"
   }
 }
 
