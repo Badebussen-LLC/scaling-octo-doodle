@@ -22,7 +22,6 @@ resource "azurerm_resource_group" "fd-rg" {
     costcenter  = "123EXPENSES456"
     environment = "dev-demoenv-14"
     owner       = "alexander.thuestad@tisipfagskole.no"
-    project     = "dev-project-14"
   }
 }
 
