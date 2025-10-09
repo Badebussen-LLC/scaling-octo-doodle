@@ -1,0 +1,79 @@
+name: 'Deploy to Dev with a push'
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Modul7/tf-project/dev/**'  # Kun trigger ved endringer i prosjekt
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      WORKDIR: "Modul7/tf-project/dev"
+      TF_INPUT: "false"              # Forhindrer interactive input
+      TF_IN_AUTOMATION: "true"       # Terraform automation mode
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.13.3
+        terraform_wrapper: false     # Bedre output
+
+    - name: Azure Login med Federated Credentials
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Export ARM_* for Terraform (OIDC)
+      run: |
+        {
+          echo "ARM_USE_OIDC=true"
+          echo "ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}"
+          echo "ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}"
+          echo "ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+        } >> "$GITHUB_ENV"
+
+    - name: Load vars from Key Vault → TF_VAR_*
+      env:
+          KV: ${{ secrets.KEYVAULT_NAME }}
+      run: |
+          set -euo pipefail
+          RG_NAME=$(az keyvault secret show --vault-name "$KV" --name resgname --query value -o tsv)
+          LOCATION=$(az keyvault secret show --vault-name "$KV" --name location --query value -o tsv)
+          {
+            echo "TF_VAR_rg_name=$RG_NAME"
+            echo "TF_VAR_location=$LOCATION"
+          } >> "$GITHUB_ENV"
+
+
+    - name: Terraform Init
+      working-directory: "${{ env.WORKDIR }}"
+      run: |
+        terraform init \
+          -backend-config="../shared/backend.hcl" \
+          -backend-config="key=projects/pushtodeploy/dev/pushtodev.tfstate" \
+          -input=false \
+          -no-color
+
+    - name: Terraform Plan
+      working-directory: "${{ env.WORKDIR }}"
+      run: terraform plan -input=false \
+
+    - name: Terraform Apply
+      working-directory: "${{ env.WORKDIR }}"
+      run: |
+        terraform apply \
+          -input=false \
+          -auto-approve \
