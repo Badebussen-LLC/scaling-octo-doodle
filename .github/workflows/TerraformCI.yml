@@ -1,4 +1,4 @@
-name: Terraform CI - Edited
+name: Terraform CI
 
 on:
   pull_request:
@@ -59,7 +59,7 @@ jobs:
         id: init
         run: |
           terraform init \
-            -backend-config="Modul8/simple-terraform/shared/backend.hcl" \
+            -backend-config="${{ github.workspace }}/${{ env.BACKEND_HCL }}" \
             -backend-config="key=tfstate/modul8/terraform.tfstate" \
             -input=false \
             -no-color
