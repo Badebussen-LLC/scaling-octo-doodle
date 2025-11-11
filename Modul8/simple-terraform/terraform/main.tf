@@ -20,7 +20,7 @@ resource "azurerm_storage_account" "main" {
   location            = azurerm_resource_group.main.location
 
   account_tier             = "Premium"
-  account_replication_type = "GRS"
+  account_replication_type = "LRS"
 
   min_tls_version = "TLS1_2"
 
