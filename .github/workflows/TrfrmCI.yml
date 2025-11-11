@@ -59,7 +59,7 @@ jobs:
         id: init
         run: |
           terraform init \
-            -backend-config="${{ env.WORKDIR }}/${{ env.BACKEND_HCL }}" \
+            -backend-config="${{ env.BACKEND_HCL }}" \
             -backend-config="key=tfstate/modul8/terraform.tfstate" \
             -input=false \
             -no-color
