@@ -59,7 +59,7 @@ jobs:
         id: init
         run: |
           terraform init \
-            -backend-config="${{ github.workspace }}/${{ env.BACKEND_HCL }}" \
+            -backend-config="Modul8/simple-terraform/shared/backend.hcl" \
             -backend-config="key=tfstate/modul8/terraform.tfstate" \
             -input=false \
             -no-color
