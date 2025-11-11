@@ -19,7 +19,7 @@ jobs:
     environment: dev
     env:
       WORKDIR: "Modul8/simple-terraform"
-      BACKEND_HCL: "shared/backend.hcl"
+      BACKEND_HCL: "Modul8/simple-terraform/shared/backend.hcl"
       TF_INPUT: "false"
       TF_IN_AUTOMATION: "true"
       
@@ -60,7 +60,7 @@ jobs:
         id: init
         run: |
           terraform init \
-            -backend-config="${{ env.BACKEND_HCL }}" \
+            -backend-config="${{ github.workspace }}/${{ env.BACKEND_HCL }}" \
             -backend-config="key=tfstate/modul8/terraform.tfstate" \
             -input=false \
             -no-color
