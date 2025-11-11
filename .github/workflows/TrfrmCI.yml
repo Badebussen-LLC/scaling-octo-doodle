@@ -4,6 +4,7 @@ on:
   pull_request:
     branches: 
       - main
+
     paths:
       - "Modul8/simple-terraform/**"
 
@@ -59,7 +60,7 @@ jobs:
         id: init
         run: |
           terraform init \
-            -backend-config="${{ env.WORKDIR }}/${{ env.BACKEND_HCL }}" \
+            -backend-config="${{ github.workspace }}/${{ env.BACKEND_HCL }}" \
             -backend-config="key=tfstate/modul8/terraform.tfstate" \
             -input=false \
             -no-color
