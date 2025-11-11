@@ -19,7 +19,7 @@ jobs:
     environment: dev
     env:
       WORKDIR: "Modul8/simple-terraform"
-      BACKEND_HCL: "Modul8/simple-terraform/shared/backend.hcl"
+      BACKEND_HCL: "shared/backend.hcl"
       TF_INPUT: "false"
       TF_IN_AUTOMATION: "true"
       
