@@ -12,10 +12,8 @@ resource "azurerm_resource_group" "main" {
 
   tags = {
     Environment = var.environment
-    ManagedBy   = "Terraform"
+    ManagedBy   = "Me"
     Project     = var.project_name
-    Test        = "CI test"
-    Test2       = "CI 2 test"
     owner       = "alexander.thuestad@tisipfagskole.no"
   }
 }
