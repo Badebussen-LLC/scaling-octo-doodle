@@ -1,6 +1,6 @@
 # Random suffix for unique naming
 resource "random_string" "suffix" {
-  length  = 6
+  length  = 4
   special = false
   upper   = false
 }
@@ -37,7 +37,7 @@ resource "azurerm_storage_account" "main" {
 
 # Storage Container
 resource "azurerm_storage_container" "demo" {
-  name                  = "demo-data"
+  name                  = "cicd-demo-althu"
   storage_account_id    = azurerm_storage_account.main.id
   container_access_type = "private"
 }
