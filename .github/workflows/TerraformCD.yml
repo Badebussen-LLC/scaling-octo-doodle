@@ -163,7 +163,7 @@ jobs:
       LOCATION: "norwayeast"
       PROJECT_NAME: "prodcicdalx"
       ACCOUNT_TIER: "Premium"
-      ACCOUNT_REPLICATION: "GRS"
+      ACCOUNT_REPLICATION: "ZRS"
     
     steps:
       - name: Checkout code
