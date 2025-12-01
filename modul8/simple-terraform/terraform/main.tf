@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "main" {
 
   tags = {
     Environment = var.environment
-    ManagedBy   = "Alexander"
+    ManagedBy   = "Alexander Thuestad"
     Project     = var.project_name
     owner       = "alexander.thuestad@tisipfagskole.no"
   }
