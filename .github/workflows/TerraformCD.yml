@@ -23,7 +23,9 @@ jobs:
       TF_IN_AUTOMATION: "true"
       ENVIRONMENT: "dev"
       LOCATION: "norwayeast"
-      PROJECT_NAME: "demoalext"
+      PROJECT_NAME: "devcicdalx"
+      ACCOUNT_TIER: "Standard"
+      ACCOUNT_REPLICATION_TYPE: "LRS"
     
     steps:
       - name: Checkout code
@@ -67,6 +69,8 @@ jobs:
             -var="environment=${{ env.ENVIRONMENT }}" \
             -var="location=${{ env.LOCATION }}" \
             -var="project_name=${{ env.PROJECT_NAME }}" \
+            -var="account_tier=${{ env.ACCOUNT_TIER }}" \
+            -var="account_replication_type=${{ env.ACCOUNT_REPLICATION_TYPE }}" \
             -no-color
       
       - name: Terraform Output
@@ -88,7 +92,9 @@ jobs:
       TF_IN_AUTOMATION: "true"
       ENVIRONMENT: "test"
       LOCATION: "norwayeast"
-      PROJECT_NAME: "demoalext"
+      PROJECT_NAME: "testcicdalx"
+      ACCOUNT_TIER: "Standard"
+      ACCOUNT_REPLICATION_TYPE: "LRS"
     
     steps:
       - name: Checkout code
@@ -132,6 +138,8 @@ jobs:
             -var="environment=${{ env.ENVIRONMENT }}" \
             -var="location=${{ env.LOCATION }}" \
             -var="project_name=${{ env.PROJECT_NAME }}" \
+            -var="account_tier=${{ env.ACCOUNT_TIER }}" \
+            -var="account_replication_type=${{ env.ACCOUNT_REPLICATION_TYPE }}" \
             -no-color
       
       - name: Terraform Output
@@ -153,7 +161,9 @@ jobs:
       TF_IN_AUTOMATION: "true"
       ENVIRONMENT: "prod"
       LOCATION: "norwayeast"
-      PROJECT_NAME: "demoalext"
+      PROJECT_NAME: "prodcicdalx"
+      ACCOUNT_TIER: "Premium"
+      ACCOUNT_REPLICATION_TYPE: "GRS"
     
     steps:
       - name: Checkout code
@@ -197,6 +207,8 @@ jobs:
             -var="environment=${{ env.ENVIRONMENT }}" \
             -var="location=${{ env.LOCATION }}" \
             -var="project_name=${{ env.PROJECT_NAME }}" \
+            -var="account_tier=${{ env.ACCOUNT_TIER }}" \
+            -var="account_replication_type=${{ env.ACCOUNT_REPLICATION_TYPE }}" \
             -no-color
       
       - name: Terraform Output
