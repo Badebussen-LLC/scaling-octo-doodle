@@ -7,12 +7,12 @@ resource "random_string" "suffix" {
 
 # Resource Group
 resource "azurerm_resource_group" "main" {
-  name     = "rg-${var.project_name}-${var.environment}"
+  name     = "rg-${var.project_name}-${var.environment}-alext"
   location = var.location
 
   tags = {
     Environment = var.environment
-    ManagedBy   = "Me"
+    ManagedBy   = "Alexander"
     Project     = var.project_name
     owner       = "alexander.thuestad@tisipfagskole.no"
   }
@@ -24,8 +24,8 @@ resource "azurerm_storage_account" "main" {
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
 
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_tier             = var.account_tier
+  account_replication_type = var.account_replication
 
   min_tls_version = "TLS1_2"
 
