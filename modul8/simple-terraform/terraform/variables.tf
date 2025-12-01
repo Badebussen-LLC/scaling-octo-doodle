@@ -11,13 +11,13 @@ variable "environment" {
 variable "location" {
   description = "Azure region for resources"
   type        = string
-  default     = "norwayeast"
+  default     = "westeurope"
 }
 
 variable "project_name" {
   description = "Project name used in resource naming"
   type        = string
-  default     = "cicddemoalext"
+  default     = "cicddemoalth"
 }
 
 variable "account_tier" {
