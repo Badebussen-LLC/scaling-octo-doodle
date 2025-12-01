@@ -17,7 +17,7 @@ variable "location" {
 variable "project_name" {
   description = "Project name used in resource naming"
   type        = string
-  default     = "demo"
+  default     = "cicddemoalext"
 }
 
 variable "account_tier" {
@@ -27,7 +27,7 @@ variable "account_tier" {
 }
 
 variable "account_replication" {
-  description = "Default account replication"
+  description = "Default account replication type"
   type        = string
   default     = "LRS"
 }
