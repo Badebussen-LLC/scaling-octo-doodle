@@ -21,13 +21,13 @@ variable "project_name" {
 }
 
 variable "account_tier" {
-  description = "Default account tier"
+  description = "Default Account Tier"
   type        = string
   default     = "Standard"
 }
 
 variable "account_replication" {
-  description = "Default account replication type"
+  description = "Default Account Replication Type"
   type        = string
   default     = "LRS"
 }
