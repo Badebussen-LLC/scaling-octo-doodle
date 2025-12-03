@@ -11,7 +11,7 @@ resource "azurerm_storage_account" "main" {
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
-  account_replication_type = "GRS"
+  account_replication_type = "LRS"
 
   # Sikkerhet
   public_network_access_enabled   = false
@@ -23,16 +23,6 @@ resource "azurerm_storage_account" "main" {
   shared_access_key_enabled = false
 
   tags = var.tags
-
-  queue_properties {
-    logging {
-      delete                = true
-      read                  = true
-      write                 = true
-      version               = "1.0"
-      retention_policy_days = 10
-    }
-  }
 
   blob_properties {
     delete_retention_policy {
