@@ -13,7 +13,7 @@ on:
 
 jobs:
   detect_drift:
-    runs-on: ubuntu-latest  # Specifies the OS environment for the job to run on
+    runs-on: ubuntu-22.04  # Specifies the OS environment for the job to run on
     #environment: production  # Declares this job as running in the production environment
 
     # Environment variables required for authentication and configuration
