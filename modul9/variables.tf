@@ -17,7 +17,7 @@ variable "environment" {
 variable "location" {
   description = "Azure region"
   type        = string
-  default     = "norwayeast"
+  default     = "westeurope"
 
   validation {
     condition     = can(regex("^(norwayeast|norwaywest|westeurope|northeurope)$", var.location))

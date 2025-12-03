@@ -14,21 +14,11 @@ resource "azurerm_storage_account" "main" {
   account_replication_type = "LRS"
 
   # Sikkerhet
-  public_network_access_enabled   = false
-  min_tls_version                 = "TLS1_2"
-  allow_nested_items_to_be_public = false
-  lifecycle {
-    prevent_destroy = true
-  }
-  shared_access_key_enabled = false
+  min_tls_version = "TLS1_2"
+
 
   tags = var.tags
 
-  blob_properties {
-    delete_retention_policy {
-      days = 10
-    }
-  }
 }
 
 # Storage Container
