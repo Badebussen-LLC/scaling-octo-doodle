@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 # Mottaker-gruppen
 resource "azurerm_resource_group" "rg_projectb" {
   name     = "rg-mvprojectb-althu"
