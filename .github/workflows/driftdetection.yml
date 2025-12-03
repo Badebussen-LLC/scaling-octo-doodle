@@ -14,7 +14,7 @@ on:
 jobs:
   detect_drift:
     runs-on: ubuntu-22.04  # Specifies the OS environment for the job to run on
-    environment: production  # Declares this job as running in the production environment
+    #environment: production  # Declares this job as running in the production environment
 
     # Environment variables required for authentication and configuration
     env:
@@ -25,14 +25,7 @@ jobs:
       WORKING_DIR: ./modul10/prosjekt-b  # Directory where Terraform files are stored
 
     steps:
-      # Step 0: Log in to Azure
-      - name: Azure Login (OIDC)
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
+      
       # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4  # Fetches the code from the repository for this job to use
