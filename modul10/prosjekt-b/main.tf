@@ -8,9 +8,11 @@ provider "azurerm" {
     }
   }
 
-  # Bruk environment variables eller federated credentials
-  use_oidc = true
+  subscription_id = "7a3c6854-0fe1-42eb-b5b9-800af1e53d70"
+  features {
+  }
 }
+
 
 terraform {
   required_version = ">= 1.0"
