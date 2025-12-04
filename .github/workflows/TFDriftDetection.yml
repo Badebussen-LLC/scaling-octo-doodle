@@ -20,6 +20,10 @@ jobs:
   check-drift:
     name: "Check for Drift"
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./modul10/driftdetection
     
     steps:
       - name: Checkout Code
