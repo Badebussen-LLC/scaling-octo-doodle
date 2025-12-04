@@ -44,4 +44,10 @@ resource "azurerm_linux_web_app" "app" {
       python_version = "3.9" # Eksempel stack
     }
   }
+
+  tags = {
+    environment = "Drift detection test"
+    ManagedBy   = "Alexander Thuestad"
+    owner       = "alexander.thuestad@tisipfagskole.no"
+  }
 }
