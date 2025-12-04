@@ -33,6 +33,13 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.0
+          
+      - name: Debug Environment Variables
+        run: |
+          echo "Sjekker om variablene er satt..."
+          echo "Client ID er satt: ${ARM_CLIENT_ID:-'TOMT! FEIL HER'}"
+          echo "Sub ID er satt: ${ARM_SUBSCRIPTION_ID:-'TOMT! FEIL HER'}"
+          # Hvis du ser "TOMT! FEIL HER" i loggen, vet du at hemmelighetene mangler.    
 
       - name: Terraform Init
         run: terraform init
