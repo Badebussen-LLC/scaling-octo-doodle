@@ -14,7 +14,7 @@ on:
 jobs:
   detect_drift:
     runs-on: ubuntu-22.04  # Specifies the OS environment for the job to run on
-    environment: dev  # Declares this job as running in the production environment
+    environment: prod  # Declares this job as running in the production environment
 
     # Environment variables required for authentication and configuration
     env:
