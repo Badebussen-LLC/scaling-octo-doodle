@@ -11,10 +11,15 @@ on:
     - cron: '0 */6 * * *'  # Runs every 6 hours
   workflow_dispatch:        # Allows manual triggering of the workflow
 
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
 jobs:
   detect_drift:
     runs-on: ubuntu-22.04  # Specifies the OS environment for the job to run on
-    environment: prod  # Declares this job as running in the production environment
+    environment: dev  # Declares this job as running in the production environment
 
     # Environment variables required for authentication and configuration
     env:
