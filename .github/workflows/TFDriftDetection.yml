@@ -1,0 +1,52 @@
+name: "Infrastructure Drift Detection"
+
+# Kjøres på tidsplan (kl 08:00 hver dag) eller manuelt
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+jobs:
+  check-drift:
+    name: "Check for Drift"
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Terraform Init
+        run: terraform init
+
+      # Dette er kjernen i drift detection.
+      # -detailed-exitcode returnerer:
+      # 0 = Ingen endringer (Succeeded)
+      # 1 = Error (Failed)
+      # 2 = Endringer oppdaget (Drift!) -> Dette vil feile steget
+      - name: Check for Drift
+        id: plan
+        continue-on-error: true  # Vi vil håndtere feilen selv i neste steg
+        run: terraform plan -detailed-exitcode -input=false
+
+      # Hvis forrige steg ga exit code 2, har vi drift.
+      - name: Alert on Drift
+        if: steps.plan.outputs.exitcode == 2
+        run: |
+          echo "::error::DRIFT DETECTED! Infrastrukturen i Azure matcher ikke Terraform-koden."
+          echo "Noen har gjort manuelle endringer i Azure Portal, eller koden er utdatert."
+          exit 1 # Feiler jobben slik at GitHub sender varsel
