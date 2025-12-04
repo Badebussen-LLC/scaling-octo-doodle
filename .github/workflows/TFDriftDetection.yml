@@ -1,4 +1,4 @@
-name: "Infrastructure Drift Detection"
+name: "Infrastructure Drift Detection versjon 2"
 
 # Kjøres på tidsplan (kl 08:00 hver dag) eller manuelt
 on:
