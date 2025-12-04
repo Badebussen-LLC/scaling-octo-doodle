@@ -28,6 +28,15 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+       
+      - name: "Debug: Test Azure Login"
+        run: |
+          az login --service-principal \
+            --username "${{ env.ARM_CLIENT_ID }}" \
+            --password "${{ env.ARM_CLIENT_SECRET }}" \
+            --tenant "${{ env.ARM_TENANT_ID }}" 
+          
+          az account set --subscription "${{ env.ARM_SUBSCRIPTION_ID }}"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
